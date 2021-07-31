@@ -9,6 +9,6 @@ class RankController extends Controller
 {
     public function index(Rank $rank)
     {
-        return $rank->get();
+        return view('index')->with(['ranks' => $rank->get()]);
     }
 }
