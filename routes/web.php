@@ -11,3 +11,4 @@
 |
 */
 Route::get('/', 'RankController@index');
+Route::get('/ranks/{rank}', 'RankController@show');

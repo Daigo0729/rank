@@ -13,16 +13,11 @@
     </head>
     <body>
         <h1>Blog Name</h1>
-        <div class='ranks'>
-            @foreach($ranks as $rank)
-                <div class='rank'>
-                    <a href='/ranks/{{$rank->id}}'><h2 class='title'>{{ $rank -> title}}</h2></a>
-                    <p class='body'>{{ $rank ->body}}</p>
-                </div>
-            @endforeach
+        <div class='rank'>
+            <h2 class='title'>{{ $rank -> title}}</h2>
+            <p class='body'>{{ $rank ->body}}</p>
+            <p class='updated_at'>{{ $rank ->updated_at}}</p>
         </div>
-        <div class='paginate'>
-            {{$ranks->links()}}
-        </div>
+        <div class='back'>[<a href='/'>back</a>]</a></div>
     </body>
 </html>
