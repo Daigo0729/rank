@@ -13,6 +13,7 @@
     </head>
     <body>
         <h1>Blog Name</h1>
+        <p class='create'>[<a href='/ranks/create'>create</a>]</p>
         <div class='ranks'>
             @foreach($ranks as $rank)
                 <div class='rank'>

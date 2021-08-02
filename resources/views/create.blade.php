@@ -13,11 +13,18 @@
     </head>
     <body>
         <h1>Blog Name</h1>
-        <div class='rank'>
-            <h2 class='title'>{{ $rank -> title}}</h2>
-            <p class='body'>{{ $rank ->body}}</p>
-            <p class='updated_at'>{{ $rank ->updated_at}}</p>
-        </div>
+        <form action="/ranks" method="POST">
+            @csrf
+            <div class="title">
+                <h2>Title</h2>
+                <input type="text" name="rank[title]" placeholder="タイトル"/>
+            </div>
+            <div class="body">
+                <h2>Body</h2>
+                <textarea name="rank[body]" placeholder="今日も一日お疲れさまでした"></textarea>
+            </div>
+            <input type="submit" value="store"/>
+        </form>
         <div class='back'>[<a href='/'>back</a>]</div>
     </body>
 </html>

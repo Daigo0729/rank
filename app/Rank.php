@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Rank extends Model
 {
+    protected $fillable = [
+    'title',
+    'body',
+];
     public function getPaginateByLimit(int $limit_count = 5)
 {
     
