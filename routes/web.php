@@ -12,5 +12,7 @@
 */
 Route::get('/', 'RankController@index');
 Route::get('/ranks/create', 'RankController@create');
+Route::get('/ranks/{rank}/edit', 'RankController@edit');
+Route::put('/ranks/{rank}', 'RankController@update');
 Route::get('/ranks/{rank}', 'RankController@show');
 Route::post('/ranks','RankController@store');

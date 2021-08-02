@@ -21,7 +21,7 @@
             </div>
             <div class="body">
                 <h2>Body</h2>
-                <textarea name="rank[body]" placeholder="今日も一日お疲れさまでした"></textarea>
+                <textarea type="text" name="rank[body]" placeholder="今日も一日お疲れさまでした"></textarea>
             </div>
             <input type="submit" value="store"/>
         </form>

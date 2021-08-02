@@ -25,5 +25,15 @@ class RankController extends Controller
         $rank->fill($input)->save();
         return redirect('/ranks/' . $rank->id);
     }
+    public function edit(Rank $rank)
+    {
+        return view('edit')->with(['rank'=>$rank]);
+    }
+    public function update(Rank $rank,Request $request)
+    {
+        $input=$request['rank'];
+        $rank->fill($input)->save();
+        return redirect('/ranks/' . $rank->id);
+    }
     
 }
