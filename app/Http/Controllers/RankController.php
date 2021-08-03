@@ -35,5 +35,10 @@ class RankController extends Controller
         $rank->fill($input)->save();
         return redirect('/ranks/' . $rank->id);
     }
+    public function destroy(Rank $rank)
+    {
+        $rank->delete();
+        return redirect('/');
+    }
     
 }
