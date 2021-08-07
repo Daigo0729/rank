@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Rank extends Model
 {
+    use SoftDeletes;
+    
     protected $fillable = [
     'title',
     'body',
@@ -15,5 +18,10 @@ class Rank extends Model
     
     return $this->orderBy('updated_at', 'DESC')->paginate($limit_count);
 }
+    public function selects()
+    {
+        return $this->hasMany('App\Select');
+    }
+
     
 }

@@ -22,7 +22,6 @@
         </form>
         <div class='rank'>
             <h2 class='title'>{{ $rank -> title}}</h2>
-            <p class='body'>{{ $rank ->body}}</p>
             <p class='updated_at'>{{ $rank ->updated_at}}</p>
         </div>
         <div class='back'>[<a href='/'>back</a>]</div>

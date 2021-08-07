@@ -28,6 +28,6 @@
                 <input type="submit" value="update"/>
             </form>
         </div>
-        <div class='back'>[<a href='/ranks/{{ $rank->id}}'>back</a>]</div>
+        <div class='back'>[<a href='/ranks/{{ $ranks->id}}'>back</a>]</div>
     </body>
 </html>

@@ -12,13 +12,11 @@
         
     </head>
     <body>
-        <h1>ランキング10</h1>
-        <p class='create'>[<a href='/ranks/create'>投稿する</a>]</p>
-        <p class='vote'>[<a href='/ranks/vote'>投票する</a>]</p>
+        <h1>投票受付中</h1>
         <div class='ranks'>
             @foreach($ranks as $rank)
                 <div class='rank'>
-                    <a href='/ranks/{{$rank->id}}'><h2 class='title'>{{ $rank -> title}}</h2></a>
+                    <a href='/ranks/vote/{{$rank->id}}'><h2 class='title'>{{ $rank -> title}}</h2></a>
                 </div>
             @endforeach
         </div>
