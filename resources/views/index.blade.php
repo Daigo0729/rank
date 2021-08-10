@@ -12,9 +12,10 @@
         
     </head>
     <body>
-        <h1>ランキング10</h1>
+        <h1>らんきんぐ10</h1>
         <p class='create'>[<a href='/ranks/create'>投稿する</a>]</p>
         <p class='vote'>[<a href='/ranks/vote'>投票する</a>]</p>
+        <p class='vote'>[<a href='/home'>ログイン</a>]</p>
         <div class='ranks'>
             @foreach($ranks as $rank)
                 <div class='rank'>

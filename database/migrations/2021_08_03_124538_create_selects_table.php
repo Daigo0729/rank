@@ -14,9 +14,9 @@ class CreateSelectsTable extends Migration
     public function up()
     {
         Schema::create('selects', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('name');
-            $table->unsignedInteger('rank_id')->nullable();
+            $table->unsignedInteger('rank_id');
             $table->foreign('rank_id')->references('id')->on('ranks');
             $table->timestamps();
             $table->softDeletes();

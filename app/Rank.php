@@ -11,7 +11,7 @@ class Rank extends Model
     
     protected $fillable = [
     'title',
-    'body',
+    'user_id',
 ];
     public function getPaginateByLimit(int $limit_count = 5)
 {
@@ -20,8 +20,9 @@ class Rank extends Model
 }
     public function selects()
     {
-        return $this->hasMany('App\Select');
+        return $this->hasMany('App\Select');        //1対多の関係
     }
+    
 
     
 }

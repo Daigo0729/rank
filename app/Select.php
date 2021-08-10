@@ -13,4 +13,9 @@ class Select extends Model
        protected $fillable = [
     'name','rank_id'
 ];
+    
+public function users()
+    {
+        return $this->belongsToMany('App\User');           //usersテーブルとの多対多の関係
+    }
 }

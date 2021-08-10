@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Rank;
 use App\Select;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;                      
 
 class RankController extends Controller
 {
@@ -12,9 +14,15 @@ class RankController extends Controller
     {
         return view('index')->with(['ranks' => $rank->getPaginateByLimit()]);
     }
-    public function show(Rank $rank)
+    public function show(Rank $rank, Select $select)
     {
+        $select=$rank->selects()->get();                //selectsテーブルからrank_idが同じものを取得
         return view('show')->with(['rank'=>$rank]);
+    }
+    public function show_user(Rank $rank, Select $select)
+    {
+        $select=$rank->selects()->get();                //selectsテーブルからrank_idが同じものを取得
+        return view('show_user')->with(['rank'=>$rank]);
     }
     public function create()
     {
@@ -31,6 +39,10 @@ class RankController extends Controller
     }
     public function store(Rank $rank, Select $select, Request $request)
     {
+        $id = Auth::id();                      //認証したユーザのidを取得
+        $rank['user_id']=$id;
+        $input_0=$request['rank'];
+        $rank->fill($input_0)->save();         //ranksテーブルにuser_idを保存
         $input_1=$request['rank'];    
         $rank->fill($input_1)->save();         //ranksテーブルにtitleを保存
         $input_2=$request['select'];
@@ -42,11 +54,17 @@ class RankController extends Controller
             ]);                             //selectsテーブルにnameとrank_idを保存
        
         }
-        return redirect('/ranks/' . $rank->id);
+        return redirect('/');
     }
-    public function store_vote(Select $select)
+    public function store_vote(Select $select, User $user, Request $request)
     {
-        dd($select->name);
+        $input=$request['select'];
+        $selectId=$input['id'];                    //選択したselectテーブルのidを取得
+        $userId = Auth::id();                      //認証したユーザidの取得
+        $user=User::find($userId);             
+        $user->selects()->attach($selectId);
+        return redirect('/');
+        
     }
     public function edit(Rank $rank)
     {

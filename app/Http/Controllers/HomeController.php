@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Rank;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;  
 
 class HomeController extends Controller
 {
@@ -21,8 +24,11 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Rank $rank)
     {
-        return view('home');
+        $userId = Auth::id();                      //認証したユーザのidを取得
+        $user=User::find($userId);
+        $rank=$user->ranks()->get();
+        return view('home')->with(['ranks'=>$rank]);
     }
 }

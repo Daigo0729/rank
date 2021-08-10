@@ -18,7 +18,7 @@ class CreateRanksTable extends Migration
             $table->string('title');
             $table->timestamps();
             $table->softDeletes();
-            $table->unsignedInteger('user_id')->nullable();
+            $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             
         });
