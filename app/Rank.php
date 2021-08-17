@@ -20,9 +20,13 @@ class Rank extends Model
     return $this->orderBy('updated_at', 'DESC')->paginate($limit_count);
 }
     public function selects()
-    {
-        return $this->hasMany('App\Select');        //1対多の関係
-    }
+        {
+            return $this->hasMany('App\Select');        //1対多の関係
+        }
+    public function user()
+        {
+            return $this->belongsToMany('App\User');           //usersテーブルとの多対多の関係
+        }
 
     
 }

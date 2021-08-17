@@ -22,8 +22,15 @@
         </form>
         <div class='rank'>
             <p class='updated_at'>{{ $rank ->updated_at}}</p>
-        </div>
-        <div class='back'>[<a href='/'>back</a>]</div>
+            <div class='selects'>
+            @foreach($selects as $select)
+                <div class='select'>
+                    <h2 class='name'>{{ $select -> name}}</h2>
+                    <h2 class='users_count'>{{ $select -> users_count}}票</h2>
+                </div>
+            @endforeach
+        </div>  
+        <div class='back'>[<a href='/'>戻る</a>]</div>
         <script>
             function deleteRank(e) {
                 'use strict';

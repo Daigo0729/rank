@@ -30,10 +30,12 @@ class RankController extends Controller
         ->get();
         return view('show')->with(['selects'=>$attentionSelect,'rank'=>$rank]);
     }
-    public function show_user(Rank $rank, Select $select)
+    public function show_user(Rank $rank)
     {
-        $select=$rank->selects()->get();                //selectsテーブルからrank_idが同じものを取得
-        return view('show_user')->with(['rank'=>$rank]);
+        $attentionSelect=Select::withCount('users')                   //selectsテーブルから投票数の多いnameを取り出す
+        ->orderBy('users_count','desc')->where('rank_id', $rank['id'])
+        ->get();
+        return view('show_user')->with(['selects'=>$attentionSelect,'rank'=>$rank]);
     }
     public function create()
     {
@@ -45,8 +47,22 @@ class RankController extends Controller
     }
     public function vote_show(Select $select, Rank $rank)
     {
+        $userId = Auth::id();
+        $rankId = $rank['id'];
+        $counts = User::find($userId)->rank()
+        ->where('rank_user.rank_id', '=', $rankId)
+        ->where('rank_user.user_id', '=', $userId)
+        ->get()->count();                                    //rank_userテーブルにrank_idとuser_idが存在するranksテーブルのカラム数を取得
         $select=$rank->selects()->get();
-        return view('vote_show')->with(['selects'=>$select, 'rank'=>$rank]);
+        
+        if($counts==1)
+            {
+                return view('voted');
+            }
+        else
+            {
+                return view('vote_show')->with(['selects'=>$select, 'rank'=>$rank]);
+            }
     }
     public function store(Rank $rank, Select $select, Request $request)
     {
@@ -67,13 +83,15 @@ class RankController extends Controller
         }
         return redirect('/');
     }
-    public function store_vote(Select $select, User $user, Request $request)
+    public function store_vote(Rank $rank, Select $select, User $user, Request $request)
     {
         $input=$request['select'];
+        $rankId=$rank['id'];
         $selectId=$input['id'];                    //選択したselectテーブルのidを取得
         $userId = Auth::id();                      //認証したユーザidの取得
-        $user=User::find($userId);             
-        $user->selects()->attach($selectId);
+        $user=User::find($userId);   
+        $user->selects()->attach($selectId);       //select_userテーブルにカラムを追加
+        $user->rank()->attach($rankId);            //rank_userテーブルにカラムを追加
         return redirect('/');
         
     }

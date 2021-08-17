@@ -38,11 +38,15 @@ class User extends Authenticatable
     ];
     
     public function selects()
-    {
-        return $this->belongsToMany('App\Select');           //selectsテーブルとの多対多の関係
-    }
+        {
+            return $this->belongsToMany('App\Select');           //selectsテーブルとの多対多の関係
+        }
     public function ranks()
-    {
-        return $this->hasMany('App\Rank');        //1対多の関係
-    }
+        {
+            return $this->hasMany('App\Rank');        //1対多の関係
+        }
+    public function rank()
+        {
+            return $this->belongsToMany('App\Rank');           //ranksテーブルとの多対多の関係
+        }
 }

@@ -14,8 +14,8 @@ class Select extends Model
     'name','rank_id'
 ];
     
-public function users()
-    {
-        return $this->belongsToMany('App\User');           //usersテーブルとの多対多の関係
-    }
+    public function users()
+        {
+            return $this->belongsToMany('App\User');           //usersテーブルとの多対多の関係
+        }
 }

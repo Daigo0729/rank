@@ -20,7 +20,7 @@ Route::delete('/ranks/{rank}','RankController@destroy');
 Route::get('/ranks/{rank}', 'RankController@show');
 Route::get('/rank_user/{rank}', 'RankController@show_user');
 Route::post('/ranks','RankController@store');
-Route::post('/ranks/vote/{select}','RankController@store_vote');
+Route::post('/ranks/vote/{rank}/{select}','RankController@store_vote');
 
 
 

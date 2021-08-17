@@ -21,6 +21,6 @@
                 </div>
             @endforeach
         </div>
-        <div class='back'>[<a href='/'>back</a>]</div>
+        <div class='back'>[<a href='/'>戻る</a>]</div>
     
 @endsection

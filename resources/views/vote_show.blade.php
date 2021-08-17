@@ -18,7 +18,7 @@
             <p class='updated_at'>{{ $rank ->updated_at}}</p>
             <div class='selects'>
                 @foreach($selects as $select)
-                    <form action="/ranks/vote/{{$select -> id}}" method="POST">         
+                    <form action="/ranks/vote/{{ $rank -> id}}/{{$select -> id}}" method="POST">         
                         @csrf
                         <div class='rank'>
                             <h2 class='name'>{{ $select -> name}}</h2>
