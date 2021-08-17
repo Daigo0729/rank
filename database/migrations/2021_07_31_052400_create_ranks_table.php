@@ -20,6 +20,7 @@ class CreateRanksTable extends Migration
             $table->softDeletes();
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->integer('destroy')->default(0);
             
         });
     }

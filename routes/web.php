@@ -11,11 +11,11 @@
 |
 */
 Route::get('/', 'RankController@index');
+Route::get('/serch/ranks', 'RankController@serch');                          
 Route::get('/ranks/create', 'RankController@create')->middleware('auth');
 Route::get('/ranks/vote', 'RankController@vote_index')->middleware('auth');
-Route::get('/ranks/vote/{rank}', 'RankController@vote_show');
+Route::get('/ranks/vote/{rank}', 'RankController@vote_show')->middleware('auth');
 Route::get('/ranks/{rank}/edit', 'RankController@edit');
-Route::put('/ranks/{rank}', 'RankController@update');
 Route::delete('/ranks/{rank}','RankController@destroy');
 Route::get('/ranks/{rank}', 'RankController@show');
 Route::get('/rank_user/{rank}', 'RankController@show_user');

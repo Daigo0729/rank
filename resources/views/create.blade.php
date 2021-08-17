@@ -12,7 +12,7 @@
         
     </head>
     <body>
-        <h1>ランキング10</h1>
+        <h1>らんきんぐ投票</h1>
         <form action="/ranks" method="POST">
             @csrf
             <div class="title">

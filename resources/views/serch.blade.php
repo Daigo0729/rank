@@ -21,8 +21,6 @@
                 </div>
             @endforeach
         </div>
-        <div class='paginate'>
-            {{$ranks->links()}}
-        </div>
+        <div class='back'>[<a href='/'>back</a>]</div>
     
 @endsection

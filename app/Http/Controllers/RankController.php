@@ -6,7 +6,7 @@ use App\Rank;
 use App\Select;
 use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;                      
+use Illuminate\Support\Facades\Auth;    
 
 class RankController extends Controller
 {
@@ -14,10 +14,21 @@ class RankController extends Controller
     {
         return view('index')->with(['ranks' => $rank->getPaginateByLimit()]);
     }
-    public function show(Rank $rank, Select $select)
+    public function serch(Rank $rank, Request $request)
     {
-        $select=$rank->selects()->get();                //selectsテーブルからrank_idが同じものを取得
-        return view('show')->with(['rank'=>$rank]);
+        $input=$request['rank'];
+        $input=$input['title'];
+        $ranks=Rank::get();
+        $rank = Rank::where('title', 'like', '%' . $input . '%')->get();
+        return view('serch')->with(['ranks' => $rank]);
+        
+    }
+    public function show(Rank $rank)
+    {
+        $attentionSelect=Select::withCount('users')                   //selectsテーブルから投票数の多いnameを取り出す
+        ->orderBy('users_count','desc')->where('rank_id', $rank['id'])
+        ->get();
+        return view('show')->with(['selects'=>$attentionSelect,'rank'=>$rank]);
     }
     public function show_user(Rank $rank, Select $select)
     {
@@ -68,13 +79,9 @@ class RankController extends Controller
     }
     public function edit(Rank $rank)
     {
-        return view('edit')->with(['rank'=>$rank]);
-    }
-    public function update(Rank $rank, Request $request)
-    {
-        $input=$request['rank'];
-        $rank->fill($input)->save();
-        return redirect('/ranks/' . $rank->id);
+        $rank['destroy']=1;
+        $rank->save();
+        return redirect('/home');
     }
     public function destroy(Rank $rank)
     {
