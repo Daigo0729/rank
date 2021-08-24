@@ -1,17 +1,7 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.app')
 
-        <title>Blog</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
-
-        
-    </head>
-    <body>
+@section('content')
         <h1>投票受付中</h1>
         <div class='rank'>
             <h2 class='title'>{{ $rank -> title}}</h2>
@@ -22,12 +12,13 @@
                         @csrf
                         <div class='rank'>
                             <h2 class='name'>{{ $select -> name}}</h2>
+                            <img src="{{ $select->image_path }}">
                         </div>
                         <input type="submit" value="投票"/>
                     </form>
                 @endforeach
             </div>
         </div>
-        <div class='back'>[<a href='/'>back</a>]</div>
-    </body>
-</html>
+        <div class='back'>[<a href='/'>home</a>]</div>
+@endsection
+

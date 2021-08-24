@@ -20,6 +20,7 @@ class CreateSelectsTable extends Migration
             $table->foreign('rank_id')->references('id')->on('ranks');
             $table->timestamps();
             $table->softDeletes();
+            $table->string('image_path')->nullable();
             
         });
     }

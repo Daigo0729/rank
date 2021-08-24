@@ -11,7 +11,7 @@ class Select extends Model
     use SoftDeletes;
     
        protected $fillable = [
-    'name','rank_id'
+    'name','rank_id','image_path'
 ];
     
     public function users()

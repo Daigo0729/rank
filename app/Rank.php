@@ -12,12 +12,18 @@ class Rank extends Model
     protected $fillable = [
     'title',
     'user_id',
-    'destroy'
+    'destroy',
+    'count'
 ];
     public function getPaginateByLimit(int $limit_count = 10)
 {
     
     return $this->orderBy('updated_at', 'DESC')->paginate($limit_count);
+}
+ public function getPaginateByLimitcount(int $limit_count = 10)
+{
+    
+    return $this->orderBy('count', 'DESC')->paginate($limit_count);
 }
     public function selects()
         {

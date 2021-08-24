@@ -6,7 +6,8 @@ use App\Rank;
 use App\Select;
 use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;    
+use Illuminate\Support\Facades\Auth;
+use Storage;
 
 class RankController extends Controller
 {
@@ -14,21 +15,32 @@ class RankController extends Controller
     {
         return view('index')->with(['ranks' => $rank->getPaginateByLimit()]);
     }
+    public function index_count(Rank $rank)
+    {
+        return view('index')->with(['ranks' => $rank->getPaginateByLimitcount()]);
+    }
+    public function index_user(Rank $rank, User $user)
+    {
+        $userId=$user['id'];
+        return view('index_user')->with(['ranks' => $rank->where('user_id',$userId)->get(),'user'=>$user]);
+    }
     public function serch(Rank $rank, Request $request)
     {
         $input=$request['rank'];
         $input=$input['title'];
-        $ranks=Rank::get();
         $rank = Rank::where('title', 'like', '%' . $input . '%')->get();
         return view('serch')->with(['ranks' => $rank]);
         
     }
-    public function show(Rank $rank)
+    public function show(Rank $rank, User $user)
     {
+        $userId=$rank['user_id'];
+        $users=User::where('id',$userId)->get();
+        $user=$users[0];
         $attentionSelect=Select::withCount('users')                   //selectsテーブルから投票数の多いnameを取り出す
         ->orderBy('users_count','desc')->where('rank_id', $rank['id'])
         ->get();
-        return view('show')->with(['selects'=>$attentionSelect,'rank'=>$rank]);
+        return view('show')->with(['selects'=>$attentionSelect,'rank'=>$rank, 'user'=>$user]);
     }
     public function show_user(Rank $rank)
     {
@@ -68,23 +80,45 @@ class RankController extends Controller
     {
         $id = Auth::id();                      //認証したユーザのidを取得
         $rank['user_id']=$id;
-        $input_0=$request['rank'];
-        $rank->fill($input_0)->save();         //ranksテーブルにuser_idを保存
-        $input_1=$request['rank'];    
-        $rank->fill($input_1)->save();         //ranksテーブルにtitleを保存
+        $input_1=$request['rank'];
         $input_2=$request['select'];
-        foreach($input_2 as $select_2)
+        $input_3=$request['image'];
+        if($input_1==null || $input_2==null || $input_3==null)
         {
-        Select::create([
-            "name"=>$select_2,
-            "rank_id"=>$rank->id
-            ]);                             //selectsテーブルにnameとrank_idを保存
-       
+            return view('create_error');
         }
-        return redirect('/');
+        else
+        {
+            $count_title=count($input_1);          //登録したお題の数を取得
+            $count_select=count($input_2);         //登録した項目の数を取得
+            $count_image=count($input_3);         //登録した項目の数を取得
+        }
+        if($count_title>=1 && $count_select>=2  && $count_select==$count_image)
+        {
+            $rank->fill($input_1)->save();         //ranksテーブルにuser_idとtitleを保存
+            for($i=0; $i<$count_select; $i++)
+            {
+                $path = Storage::disk('s3')->putFile('rank', $input_3[$i], 'public');
+                $image_path = Storage::disk('s3')->url($path);
+                Select::create([
+                "name"=>$input_2[$i],
+                "rank_id"=>$rank->id,
+                "image_path"=>$image_path
+                ]);                             //selectsテーブルにnameとrank_idを保存
+           
+            }
+        
+            return redirect('/');
+        }
+        else
+        {
+            return view('create_error');
+        }
     }
     public function store_vote(Rank $rank, Select $select, User $user, Request $request)
     {
+        $rank['count']+=1;
+        $rank->save();
         $input=$request['select'];
         $rankId=$rank['id'];
         $selectId=$input['id'];                    //選択したselectテーブルのidを取得

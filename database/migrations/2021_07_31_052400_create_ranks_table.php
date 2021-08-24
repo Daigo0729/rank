@@ -21,6 +21,7 @@ class CreateRanksTable extends Migration
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->integer('destroy')->default(0);
+            $table->integer('count')->default(0);
             
         });
     }

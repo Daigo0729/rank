@@ -18,6 +18,7 @@
                 @foreach($ranks as $rank)
                         <div class='rank'>
                             <a href='/rank_user/{{$rank->id}}'><h2 class='name'>{{ $rank -> title}}</h2></a>
+                            <p class='count'>総票数:{{ $rank -> count}}票</p>
                         </div>
                 @endforeach
             </div>

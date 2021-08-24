@@ -1,19 +1,9 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.app')
 
-        <title>Blog</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
-
-        
-    </head>
-    <body>
+@section('content')
         <h1>らんきんぐ投票</h1>
-        <form action="/ranks" method="POST">
+        <form action="/ranks" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="title">
                 <h2>お題</h2>
@@ -22,6 +12,7 @@
             <div class="name">
                 <h2>項目</h2>
                 <textarea type="text" name="select[]" placeholder="例；マリオ"></textarea>
+                <input type="file" name="image[]">
                 <input type="button" value="＋" class="add pluralBtn">
                 <input type="button" value="－" class="del pluralBtn">
             </div>
@@ -29,8 +20,8 @@
         </form>
  
     
-        <div class='back'>[<a href='/'>戻る</a>]</div>
-    </body>
+        <div class='back'>[<a href='/'>home</a>]</div>
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript">
     $(document).on("click", ".add", function() {
@@ -44,4 +35,4 @@
     });
     </script>
 
-</html>
+@endsection

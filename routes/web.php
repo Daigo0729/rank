@@ -11,8 +11,10 @@
 |
 */
 Route::get('/', 'RankController@index');
+Route::get('/count', 'RankController@index_count');
 Route::get('/serch/ranks', 'RankController@serch');                          
 Route::get('/ranks/create', 'RankController@create')->middleware('auth');
+Route::get('/ranks/user/{user}', 'RankController@index_user');
 Route::get('/ranks/vote', 'RankController@vote_index')->middleware('auth');
 Route::get('/ranks/vote/{rank}', 'RankController@vote_show')->middleware('auth');
 Route::get('/ranks/{rank}/edit', 'RankController@edit');

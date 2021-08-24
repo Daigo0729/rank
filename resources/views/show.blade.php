@@ -4,6 +4,8 @@
 @section('content')
         
         <h1 class='title'>{{ $rank -> title}}</h1>
+        <a href='/ranks/user/{{$user->id}}'><p class='count'>投稿者:{{ $user->name}}</p></a>
+        <p class='count'>総票数:{{ $rank -> count}}票</p>
         @if($rank['destroy']===1)
             <p>投票期間は終了しています</p>
         @else
@@ -16,11 +18,13 @@
                 <div class='select'>
                     <h2 class='name'>{{ $select -> name}}</h2>
                     <h2 class='users_count'>{{ $select -> users_count}}票</h2>
+                    <img src="{{ $select->image_path }}">
+                    
                 </div>
             @endforeach
         </div>  
             
             
         </div>
-        <div class='back'>[<a href='/'>戻る</a>]</div>
+        <div class='back'>[<a href='/'>home</a>]</div>
 @endsection
