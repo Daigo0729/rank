@@ -6,5 +6,5 @@
             投票は完了しています
         </div>
         
-        <div class='back'>[<a href='/'>戻る</a>]</div>
+        <div class='back'>[<a href='/'>home</a>]</div>
 @endsection

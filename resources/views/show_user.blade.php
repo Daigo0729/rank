@@ -1,17 +1,7 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.app')
 
-        <title>Blog</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
-
-        
-    </head>
-    <body>
+@section('content')
         <h1 class='title'>{{ $rank -> title}}</h1>
         <p class="edit">[<a href="/ranks/{{$rank->id}}/edit">投票を終了する</a>]</p>
         <form action="/ranks/{{ $rank->id}}" id="form_delete" method="POST">
@@ -27,10 +17,12 @@
                 <div class='select'>
                     <h2 class='name'>{{ $select -> name}}</h2>
                     <h2 class='users_count'>{{ $select -> users_count}}票</h2>
+                    <img src="{{ $select->image_path }}">
                 </div>
             @endforeach
         </div>  
         <div class='back'>[<a href='/'>戻る</a>]</div>
+@endsection
         <script>
             function deleteRank(e) {
                 'use strict';
@@ -39,5 +31,4 @@
                 }
             }
         </script>
-    </body>
-</html>
+

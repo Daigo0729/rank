@@ -24,12 +24,34 @@ class RankController extends Controller
         $userId=$user['id'];
         return view('index_user')->with(['ranks' => $rank->where('user_id',$userId)->get(),'user'=>$user]);
     }
-    public function serch(Rank $rank, Request $request)
-    {
+    public function serch_index(Rank $rank, Request $request)
+    { 
         $input=$request['rank'];
         $input=$input['title'];
+        if($input==null)
+        {
+            return redirect('/');
+        }
+        else
+        {
         $rank = Rank::where('title', 'like', '%' . $input . '%')->get();
-        return view('serch')->with(['ranks' => $rank]);
+        return view('serch_index')->with(['ranks' => $rank]);
+        }
+        
+    }
+    public function serch_vote(Rank $rank, Request $request)
+    { 
+        $input=$request['rank'];
+        $input=$input['title'];
+        if($input==null)
+        {
+            return redirect('/');
+        }
+        else
+        {
+        $rank = Rank::where('title', 'like', '%' . $input . '%')->where('destroy','=',0)->get();
+        return view('serch_vote')->with(['ranks' => $rank]);
+        }
         
     }
     public function show(Rank $rank, User $user)
@@ -37,7 +59,7 @@ class RankController extends Controller
         $userId=$rank['user_id'];
         $users=User::where('id',$userId)->get();
         $user=$users[0];
-        $attentionSelect=Select::withCount('users')                   //selectsテーブルから投票数の多いnameを取り出す
+        $attentionSelect=Select::withCount('users')                   //selectsテーブルから投票数の多い順を取り出す
         ->orderBy('users_count','desc')->where('rank_id', $rank['id'])
         ->get();
         return view('show')->with(['selects'=>$attentionSelect,'rank'=>$rank, 'user'=>$user]);

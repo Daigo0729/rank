@@ -11,6 +11,7 @@
             </div>
             <div class="name">
                 <h2>項目</h2>
+                <p>※画像は.jpgで登録してください</p>
                 <textarea type="text" name="select[]" placeholder="例；マリオ"></textarea>
                 <input type="file" name="image[]">
                 <input type="button" value="＋" class="add pluralBtn">

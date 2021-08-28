@@ -29,6 +29,7 @@ class HomeController extends Controller
         $userId = Auth::id();                      //認証したユーザのidを取得
         $user=User::find($userId);
         $rank=$user->ranks()->get();
-        return view('home')->with(['ranks'=>$rank]);
+        $voted_rank=User::find($userId)->rank()->get();
+        return view('home')->with(['ranks'=>$rank, 'voted_ranks'=>$voted_rank]);
     }
 }
