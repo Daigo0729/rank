@@ -36,4 +36,17 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
+    public function selects()
+        {
+            return $this->belongsToMany('App\Select');           //selectsテーブルとの多対多の関係
+        }
+    public function ranks()
+        {
+            return $this->hasMany('App\Rank');        //1対多の関係
+        }
+    public function rank()
+        {
+            return $this->belongsToMany('App\Rank');           //ranksテーブルとの多対多の関係
+        }
 }
