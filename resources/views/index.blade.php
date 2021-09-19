@@ -3,7 +3,7 @@
 
 @section('content')
          
-        <h1>らんきんぐ投票</h1>
+        <h1>ランキング投票</h1>
         <p class='create'>[<a href='/'>新しい順</a>]</p>
         <p class='create'>[<a href='/count'>投票数順</a>]</p>
         <form action="/serch/ranks_index" method="GET">
