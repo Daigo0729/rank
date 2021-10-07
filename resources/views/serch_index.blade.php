@@ -4,7 +4,7 @@
 @section('content')
 
         
-        <h1>らんきんぐ投票</h1>
+        <h1>ランキング投票</h1>
         <div class='ranks'>
             @foreach($ranks as $rank)
                 <div class='rank'>

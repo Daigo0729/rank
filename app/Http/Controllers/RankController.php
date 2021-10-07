@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Rank;
 use App\Select;
 use App\User;
+use App\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Storage;
@@ -97,6 +98,40 @@ class RankController extends Controller
             {
                 return view('vote_show')->with(['selects'=>$select, 'rank'=>$rank]);
             }
+    }
+    public function create_comment(Rank $rank, Comment $comment)
+    {
+        return view('create_comment')->with(['rank'=>$rank, 'comment'=>$comment]);
+    }
+    public function store_comment( Comment $comment, Rank $rank, User $user, Request $request)
+    {
+        $userId=Auth::id();
+        $rankId=$rank['id'];
+        $input=$request['comment'];
+        $commentBody=$input['body'];
+        $commentCount=strlen($commentBody);
+        if($commentCount==0)
+        {
+            return view('error_comment');
+        }
+        else
+        {
+        Comment::create([
+                "user_id"=>$userId,
+                "rank_id"=>$rankId,
+                "body"=>$commentBody
+                ]);                             //commentsテーブルにuser?idとrank_idとbodyを保存
+        return redirect('/');
+        }
+        
+    }
+    public function read_comment(Comment $comment, Rank $rank, User $user)
+    {
+        $rankId=$rank['id'];
+        $comment=Comment::where('rank_id',$rankId)->orderBy('created_at','desc')->get();
+        $user=User::get();
+        $line='---------------------------------------------------------------------------------------------------';
+        return view('read_comment')->with(['comments'=>$comment,'line'=>$line,'users'=>$user]);
     }
     public function store(Rank $rank, Select $select, Request $request)
     {

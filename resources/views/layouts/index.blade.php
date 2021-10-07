@@ -4,7 +4,7 @@
 @section('content')
 
         <div class="container">
-        <h1>らんきんぐ投票</h1>
+        <h1>ランキング投票</h1>
         </div>
         <form action="/serch/ranks" method="GET">
             @csrf

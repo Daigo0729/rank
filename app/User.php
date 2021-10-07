@@ -45,6 +45,10 @@ class User extends Authenticatable
         {
             return $this->hasMany('App\Rank');        //1対多の関係
         }
+    public function comments()
+        {
+            return $this->hasMany('App\Comment');        //1対多の関係
+        }
     public function rank()
         {
             return $this->belongsToMany('App\Rank');           //ranksテーブルとの多対多の関係

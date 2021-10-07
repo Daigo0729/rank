@@ -29,6 +29,10 @@ class Rank extends Model
         {
             return $this->hasMany('App\Select');        //1対多の関係
         }
+    public function comments()
+        {
+            return $this->hasMany('App\Comment');        //1対多の関係
+        }
     public function user()
         {
             return $this->belongsToMany('App\User');           //usersテーブルとの多対多の関係

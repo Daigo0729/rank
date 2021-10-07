@@ -2,7 +2,7 @@
 @extends('layouts.app')
 
 @section('content')
-        <h1>らんきんぐ投票</h1>
+        <h1>ランキング投票</h1>
         <form action="/ranks" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="title">

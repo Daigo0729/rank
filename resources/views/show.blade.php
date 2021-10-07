@@ -5,6 +5,8 @@
         
         <h1 class='title'>{{ $rank -> title}}</h1>
         <a href='/ranks/user/{{$user->id}}'><p class='count'>投稿者:{{ $user->name}}</p></a>
+        <a href='/ranks/comment/{{$rank->id}}'><p>コメントを書く</p></a>
+        <a href='/ranks/comment/read/{{$rank->id}}'><p>コメントを見る</p></a>
         <p class='count'>総票数:{{ $rank -> count}}票</p>
         @if($rank['destroy']===1)
             <p>投票期間は終了しています</p>

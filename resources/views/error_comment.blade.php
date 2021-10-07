@@ -3,7 +3,7 @@
 
 @section('content')
         <div class='ranks'>
-            お題は1つ,項目は画像をつけて２つ以上登録してください
+            コメントは１文字以上入力してください
         </div>
         
         <div class='back'>[<a href='/'>home</a>]</div>
