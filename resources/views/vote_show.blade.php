@@ -11,10 +11,27 @@
                     <form action="/ranks/vote/{{ $rank -> id}}/{{$select -> id}}" method="POST">         
                         @csrf
                         <div class='rank'>
-                            <h2 class='name'>{{ $select -> name}}</h2>
+                            <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+        <div class="card-header">{{ $select -> name}}</div>
+        <div class="card-body">
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+
+                            
                             <img src="{{ $select->image_path }}">
                         </div>
                         <input type="submit" value="投票"/>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
                     </form>
                 @endforeach
             </div>

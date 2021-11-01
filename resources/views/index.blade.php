@@ -16,7 +16,7 @@
         </form>
         <span class='create'>[<a href='/'>新しい順</a>]</span>
         <span class='create'>[<a href='/count'>投票数順</a>]</span>
-        <span class='vote'>[<a href='/ranks/vote'>ジャンル</a>]</span>
+        
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">

@@ -5,13 +5,13 @@
         <form action="/ranks" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="title">
-                <h2>お題</h2>
-                <input type="text" name="rank[title]" placeholder="例；好きなキャラ"/>
+                <h1>お題</h1>
+                <input type="text" name="rank[title]" size="100" placeholder="例；好きなキャラ"/>
             </div>
             <div class="name">
                 <h2>項目</h2>
                 <p>※画像は.jpgで登録してください</p>
-                <textarea type="text" name="select[]" placeholder="例；マリオ"></textarea>
+                <textarea type="text" name="select[]" size="100" placeholder="例；マリオ"></textarea>
                 <input type="file" name="image[]">
                 <input type="button" value="＋" class="add pluralBtn">
                 <input type="button" value="－" class="del pluralBtn">
