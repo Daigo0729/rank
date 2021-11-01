@@ -2,14 +2,24 @@
 @extends('layouts.app')
 
 @section('content')
-        <h1>投票受付中</h1>
         <form action="/serch/ranks_vote" method="GET">
             @csrf
             <div class="serch">
-                <input type="text" name="rank[title]" placeholder="キーワードを入力してください"/>
+                <input type="text" name="rank[title]" size="100" placeholder="キーワードを入力してください"/>
+                <input type="submit" value="検索"/>
             </div>
-            <input type="submit" value="検索"/>
         </form>
+        <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+        <div class="card-header">投票受付中</div>
+        <div class="card-body">
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
         <div class='ranks'>
             @foreach($ranks as $rank)
                 @if($rank['destroy']===0)
@@ -19,6 +29,11 @@
                 @endif
             @endforeach
         </div>
+        </div>
+                </div>
+            </div>
+        </div>
+    </div>
         <div class='paginate'>
             {{$ranks->links()}}
         </div>

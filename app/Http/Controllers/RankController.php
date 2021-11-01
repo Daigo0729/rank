@@ -120,7 +120,7 @@ class RankController extends Controller
                 "user_id"=>$userId,
                 "rank_id"=>$rankId,
                 "body"=>$commentBody
-                ]);                             //commentsテーブルにuser?idとrank_idとbodyを保存
+                ]);                             //commentsテーブルにuser_idとrank_idとbodyを保存
         return redirect('/');
         }
         

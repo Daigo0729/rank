@@ -6,7 +6,7 @@
         <form action="/comments/{{$rank ->id}}" method="POST">
             @csrf
             <div class="title">
-                <input type="name" name="comment[body]" placeholder="１文字以上で"/>
+                <input type="name" name="comment[body]" size="100" placeholder="１文字以上で"/>
             </div>
             <input type="submit" value="登録"/>
         </form>
